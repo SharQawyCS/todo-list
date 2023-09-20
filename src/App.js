@@ -25,7 +25,7 @@ function App() {
           justifyContent: "center",
           alignItems: "center",
           backgroundColor: "#79AC78",
-          height: "100vh",
+          minHeight: "100vh",
           fontFamily: "AlexFont",
         }}>
         <TodoList />

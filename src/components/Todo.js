@@ -2,14 +2,14 @@ import React from "react";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
 import Grid from "@mui/material/Unstable_Grid2";
-import { Typography, Button } from "@mui/material";
+import { Typography } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 // Icons =>
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
-export default function Todo() {
+export default function Todo({ task, handleIscompleted }) {
   return (
     <>
       <Card
@@ -24,10 +24,10 @@ export default function Todo() {
           <Grid container spacing={2}>
             <Grid xs={6} sm={8}>
               <Typography variant="h5" sx={{ textAlign: "left" }}>
-                First Task
+                {task.title}
               </Typography>
               <Typography variant="h6" sx={{ textAlign: "left" }}>
-                First Task Details
+                {task.details}
               </Typography>
             </Grid>
             <Grid
@@ -36,10 +36,16 @@ export default function Todo() {
               display="flex"
               justifyContent="space-between"
               alignItems="center">
+              {/* Check Button */}
               <IconButton
+                onClick={() => {
+                  handleIscompleted(task.id);
+                }}
                 sx={{
                   color: "seconed",
-                  backgroundColor: "white",
+                  backgroundColor: task.isCompleted
+                    ? "rgba(0,0,0,.6)"
+                    : "white",
                   border: "solid seconed 1px",
                 }}>
                 <CheckIcon />
