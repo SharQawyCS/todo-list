@@ -12,7 +12,7 @@ import Divider from "@mui/material/Divider";
 
 export default function TodoList() {
   return (
-    <Container maxWidth="md">
+    <Container maxWidth="sm">
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h3">My Tasks</Typography>
