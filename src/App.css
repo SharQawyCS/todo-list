@@ -1,4 +1,15 @@
+* {
+  transition: ease 0.3s;
+}
 .App {
   text-align: center;
 }
 
+.todo-card:hover {
+  padding: 10px 0 10px !important;
+  box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4) !important;
+  
+}
+.todo-card{
+  transition: ease 0.3s !important;
+}

@@ -6,16 +6,17 @@ import { Typography, Button } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 // Icons =>
 import CheckIcon from "@mui/icons-material/Check";
-import DeleteOutlineOutlinedIcon from '@mui/icons-material/DeleteOutlineOutlined';
-import EditOutlinedIcon from '@mui/icons-material/EditOutlined';
+import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
+import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 
 export default function Todo() {
   return (
     <>
       <Card
+        className="todo-card"
         sx={{
           minWidth: 275,
-          marginTop: 5,
+          marginTop: "20px",
           backgroundColor: "pink",
           color: "white",
         }}>
@@ -25,8 +26,15 @@ export default function Todo() {
               <Typography variant="h5" sx={{ textAlign: "left" }}>
                 First Task
               </Typography>
+              <Typography variant="h6" sx={{ textAlign: "left" }}>
+                First Task Details
+              </Typography>
             </Grid>
-            <Grid xs={4} display="flex" justifyContent="space-between">
+            <Grid
+              xs={4}
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center">
               <IconButton
                 aria-label="delete"
                 sx={{
