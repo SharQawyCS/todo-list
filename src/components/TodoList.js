@@ -2,7 +2,6 @@ import * as React from "react";
 import Todo from "./Todo";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
@@ -13,7 +12,7 @@ import Divider from "@mui/material/Divider";
 
 export default function TodoList() {
   return (
-    <Container maxWidth="sm">
+    <Container maxWidth="md">
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography variant="h3">My Tasks</Typography>

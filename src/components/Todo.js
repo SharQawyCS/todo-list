@@ -1,7 +1,7 @@
 import React from "react";
 import Card from "@mui/material/Card";
-import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
+import Grid from "@mui/material/Unstable_Grid2";
 import { Typography, Button } from "@mui/material";
 
 export default function Todo() {
@@ -9,7 +9,13 @@ export default function Todo() {
     <>
       <Card sx={{ minWidth: 275, backgroundColor: "pink", color: "white" }}>
         <CardContent>
-          <Typography variant="h2">First Task</Typography>
+          <Grid container spacing={2} sx={{background: "green"}}>
+            <Grid xs={6} md={8} >
+            </Grid>
+            <Grid xs={6} md={4}>
+              <Typography variant="h4">First Task</Typography>
+            </Grid>
+          </Grid>
         </CardContent>
       </Card>
     </>
