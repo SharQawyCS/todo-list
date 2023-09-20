@@ -1,4 +1,5 @@
 import * as React from "react";
+import Todo from "./Todo";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -19,25 +20,19 @@ export default function TodoList() {
           <Divider />
           {/* ---Toggle Buttons--- */}
           <ToggleButtonGroup
-          style={{marginTop: "30px"}}
+            style={{ marginTop: "30px" }}
             // value={alignment}
             exclusive
             // onChange={handleAlignment}
             aria-label="text alignment">
-            <ToggleButton value="left" >
-              All
-            </ToggleButton>
-            <ToggleButton value="center" >
-              Completed{" "}
-            </ToggleButton>
-            <ToggleButton value="right" >
-              Not Completed
-            </ToggleButton>
+            <ToggleButton value="left">All</ToggleButton>
+            <ToggleButton value="center">Completed </ToggleButton>
+            <ToggleButton value="right">Not Completed</ToggleButton>
           </ToggleButtonGroup>
+          <Todo />
+          <Todo />
+          <Todo />
         </CardContent>
-        <CardActions>
-          <Button size="small">Learn More</Button>
-        </CardActions>
       </Card>
     </Container>
   );
