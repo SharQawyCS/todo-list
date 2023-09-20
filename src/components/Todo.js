@@ -17,12 +17,12 @@ export default function Todo() {
         sx={{
           minWidth: 275,
           marginTop: "20px",
-          backgroundColor: "pink",
+          backgroundColor: "main",
           color: "white",
         }}>
         <CardContent>
-          <Grid container spacing={2} sx={{ background: "#c1ddffbf" }}>
-            <Grid xs={8}>
+          <Grid container spacing={2}>
+            <Grid xs={6} sm={8}>
               <Typography variant="h5" sx={{ textAlign: "left" }}>
                 First Task
               </Typography>
@@ -31,34 +31,32 @@ export default function Todo() {
               </Typography>
             </Grid>
             <Grid
-              xs={4}
+              xs={6}
+              sm={4}
               display="flex"
               justifyContent="space-between"
               alignItems="center">
               <IconButton
-                aria-label="delete"
                 sx={{
-                  color: "green",
+                  color: "seconed",
                   backgroundColor: "white",
-                  border: "solid green 3px",
+                  border: "solid seconed 1px",
                 }}>
                 <CheckIcon />
               </IconButton>
               <IconButton
-                aria-label="delete"
                 sx={{
-                  color: "#1b73e8de",
+                  color: "third",
                   backgroundColor: "white",
-                  border: "solid #1b73e8de 3px",
+                  border: "solid third 1px",
                 }}>
                 <EditOutlinedIcon />
               </IconButton>
               <IconButton
-                aria-label="delete"
                 sx={{
-                  color: "#ff0f0d",
+                  color: "fourth",
                   backgroundColor: "white",
-                  border: "solid #ff0f0d 3px",
+                  border: "solid fourth 1px",
                 }}>
                 <DeleteOutlineOutlinedIcon />
               </IconButton>

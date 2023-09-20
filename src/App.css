@@ -1,6 +1,7 @@
 * {
   transition: ease 0.3s;
 }
+
 .App {
   text-align: center;
 }
@@ -8,8 +9,56 @@
 .todo-card:hover {
   padding: 10px 0 10px !important;
   box-shadow: 0px 7px 7px rgba(0, 0, 0, 0.4) !important;
-  
 }
-.todo-card{
+.todo-card {
   transition: ease 0.3s !important;
+}
+/*===== Fonts ===== */
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Black.ttf);
+  font-weight: 100;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Thin.ttf);
+  font-weight: 200;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-ExtraLight.ttf);
+  font-weight: 300;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Light.ttf);
+  font-weight: 400;
+  /* !!! */
+}
+
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Regular.ttf);
+  font-weight: 500;
+  /* !!! */
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Medium.ttf);
+  font-weight: 600;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-Bold.ttf);
+  font-weight: 700;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-SemiBold.ttf);
+  font-weight: 800;
+}
+@font-face {
+  font-family: AlexFont;
+  src: url(../public/fonts/Alexandria-ExtraBold.ttf);
+  font-weight: 900;
 }
