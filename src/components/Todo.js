@@ -42,6 +42,7 @@ export default function Todo({ task }) {
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const handleOpeEditDialog = () => {
     setOpenEditDialog(true);
+    setSubmitBtn(true) //To Disable submit BTN
   };
 
   const handleCloseEditDialog = () => {
@@ -192,7 +193,7 @@ export default function Todo({ task }) {
               display="flex"
               justifyContent="space-between"
               alignItems="center">
-              {/* Completed Button */}
+              {/* Completed Check Button */}
               <IconButton
                 onClick={() => {
                   handleIsCompleted(task.id);
