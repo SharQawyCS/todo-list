@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { TodosContext } from "../contexts/TodosContext";
 import Todo from "./Todo";
 
@@ -27,17 +27,22 @@ export default function TodoList() {
     return <Todo key={task.id} task={task} />;
   });
 
+  //!useEffect , get from local to setTodos
+  useEffect(() => {
+    setTodos(JSON.parse(localStorage.getItem("todos")));
+  }, []);
+
   //Adding New Task
+
   function handleAddClick() {
-    setTodos([
-      ...todos,
-      {
-        id: uuidv4(),
-        title: titleInput,
-        details: "",
-        isCompleted: false,
-      },
-    ]);
+    const newTodo = {
+      id: uuidv4(),
+      title: titleInput,
+      details: "",
+      isCompleted: false,
+    };
+    setTodos([...todos, newTodo]);
+    localStorage.setItem("todos", JSON.stringify([...todos, newTodo]));
     setTitleInput("");
   }
 

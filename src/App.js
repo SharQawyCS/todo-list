@@ -26,21 +26,27 @@ const theme = createTheme({
 const intialTodos = [
   {
     id: uuidv4(),
-    title: "Read A book",
-    details: "My Best Book",
+    title: "Welcome To My Tasks",
+    details: "Let's Learn How To Use",
+    isCompleted: false,
+  },
+  {
+    id: uuidv4(),
+    title: "I am a completed task ",
+    details: "I am details",
     isCompleted: true,
   },
   {
     id: uuidv4(),
-    title: "seconed Task ",
-    details: "My LoL Task",
+    title: "I am a uncompleted task",
+    details: "You can use right buttons to edit and delete task",
     isCompleted: false,
   },
   {
     id: uuidv4(),
-    title: "Not A Task ",
-    details: "I am a JOKE",
-    isCompleted: false,
+    title: "I am a task without details, Thanks For Using My Tasks",
+    details: "",
+    isCompleted: true,
   },
 ];
 

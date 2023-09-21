@@ -36,6 +36,8 @@ export default function Todo({ task }) {
       return task;
     });
     setTodos(updatedTaskMapForCheck);
+    //Save Tasks To Local Storage After Edit Anything
+    localStorage.setItem("todos", JSON.stringify(updatedTaskMapForCheck));
   }
 
   //State For Edit Task => Edit DIALOG
@@ -57,15 +59,17 @@ export default function Todo({ task }) {
     details: task.details,
   });
   function handleEdit(taskId) {
-    const updatedTaskMapForEdit = todos.map((task) => {
+    const updatedTasksMapForEdit = todos.map((task) => {
       if (task.id === taskId) {
         task.title = updatedTask.title;
         task.details = updatedTask.details;
       }
       return task;
     });
-    setTodos(updatedTaskMapForEdit);
+    setTodos(updatedTasksMapForEdit);
     handleCloseEditDialog();
+    //Save Tasks To Local Storage After Edit Anything
+    localStorage.setItem("todos", JSON.stringify(updatedTasksMapForEdit));
   }
 
   //State For Delete Task => Delete DIALOG
@@ -80,14 +84,16 @@ export default function Todo({ task }) {
   //Delete Task ƒn
   const handleDelete = (taskId) => {
     setOpenDeleteDialog(false);
-    const updatedTasks = todos.filter((task) => {
+    const updatedTasksFilterForDelete = todos.filter((task) => {
       if (task.id === taskId) {
         return false;
       } else {
         return true;
       }
     });
-    setTodos(updatedTasks);
+    setTodos(updatedTasksFilterForDelete);
+    //Save Tasks To Local Storage After Edit Anything
+    localStorage.setItem("todos", JSON.stringify(updatedTasksFilterForDelete));
   };
 
   return (
@@ -104,7 +110,6 @@ export default function Todo({ task }) {
             defaultValue={task.title}
             onChange={(e) => {
               setSubmitBtn(false); //To Enable Sumbit btn after editing
-              console.log("gg");
               setUpdatedTask({
                 ...updatedTask,
                 title: e.target.value,
