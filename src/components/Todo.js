@@ -42,7 +42,7 @@ export default function Todo({ task }) {
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const handleOpeEditDialog = () => {
     setOpenEditDialog(true);
-    setSubmitBtn(true) //To Ensure That submit BTN Is Disable 
+    setSubmitBtn(true); //To Ensure That submit BTN Is Disable
   };
 
   const handleCloseEditDialog = () => {
@@ -52,7 +52,10 @@ export default function Todo({ task }) {
   const [submitBtn, setSubmitBtn] = useState(true);
 
   //Edit Task ƒn
-  const [updatedTask, setUpdatedTask] = useState({ title: "", details: "" });
+  const [updatedTask, setUpdatedTask] = useState({
+    title: task.title,
+    details: task.details,
+  });
   function handleEdit(taskId) {
     const updatedTaskMapForEdit = todos.map((task) => {
       if (task.id === taskId) {
@@ -101,10 +104,10 @@ export default function Todo({ task }) {
             defaultValue={task.title}
             onChange={(e) => {
               setSubmitBtn(false); //To Enable Sumbit btn after editing
+              console.log("gg");
               setUpdatedTask({
                 ...updatedTask,
                 title: e.target.value,
-                details: task.details,
               });
             }}
             fullWidth
@@ -118,7 +121,6 @@ export default function Todo({ task }) {
               setSubmitBtn(false); //To Enable Sumbit btn after editing
               setUpdatedTask({
                 ...updatedTask,
-                title: task.title,
                 details: e.target.value,
               });
             }}
