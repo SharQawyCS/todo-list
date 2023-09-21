@@ -73,7 +73,7 @@ export default function TodoList() {
   }
 
   return (
-    <Container maxWidth="sm" >
+    <Container maxWidth="sm">
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography
@@ -88,16 +88,15 @@ export default function TodoList() {
             onChange={toggleDisplayType}
             style={{ margin: "10px 0 " }}
             exclusive
-            aria-label="text alignment">
+            aria-label="text alignment"
+            color="primary">
             <ToggleButton value="all">All</ToggleButton>
             <ToggleButton value="completed">Completed </ToggleButton>
             <ToggleButton value="uncompleted">Not Completed</ToggleButton>
           </ToggleButtonGroup>
 
           {/* ====== All Tasks ====== */}
-          <div style={{ height: "60vh", overflow: "scroll" }}>
-            {tasksMap}
-          </div>
+          <div style={{ height: "60vh", overflow: "scroll" }}>{tasksMap}</div>
 
           {/* ====== All Tasks ====== */}
 
@@ -121,6 +120,7 @@ export default function TodoList() {
             />
 
             <Button
+              disabled={(titleInput === "")}
               onClick={handleAddClick}
               sx={{
                 backgroundColor: "main",

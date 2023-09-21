@@ -176,7 +176,7 @@ export default function Todo({ task }) {
 
       {/* Task Card */}
       <Card
-        className="todo-card" 
+        className="todo-card"
         sx={{
           minWidth: 275,
           marginTop: "20px",
@@ -186,7 +186,12 @@ export default function Todo({ task }) {
         <CardContent>
           <Grid container spacing={2}>
             <Grid xs={6} sm={8}>
-              <Typography variant="h5" sx={{ textAlign: "left" }}>
+              <Typography
+                variant="h5"
+                sx={{
+                  textAlign: "left",
+                  textDecoration: task.isCompleted ? "line-through" : "none",
+                }}>
                 {task.title}
               </Typography>
               <Typography variant="h6" sx={{ textAlign: "left" }}>
