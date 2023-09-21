@@ -11,6 +11,7 @@ import IconButton from "@mui/material/IconButton";
 
 //Dialog from MUI
 import Button from "@mui/material/Button";
+import TextField from "@mui/material/TextField";
 import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
@@ -21,14 +22,13 @@ import DialogTitle from "@mui/material/DialogTitle";
 import CheckIcon from "@mui/icons-material/Check";
 import DeleteOutlineOutlinedIcon from "@mui/icons-material/DeleteOutlineOutlined";
 import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
-import { AlternateEmail } from "@mui/icons-material";
 
-//Main ƒn
+//Main ƒn Starting
 export default function Todo({ task }) {
   const { todos, setTodos } = useContext(TodosContext);
 
   //Update State Of The Task
-  //Toggle Checked
+  //Toggle Checked Completed
   function handleIsCompleted(taskId) {
     const updatedTask = todos.map((task) => {
       if (task.id === taskId) {
@@ -39,11 +39,29 @@ export default function Todo({ task }) {
     setTodos(updatedTask);
   }
 
-  //Delete Task ƒn
+  //Edit Task ƒn
+  //State For Edit Task
+  const [openEditDialog, setOpenEditDialog] = React.useState(false);
+  const handleOpeEditDialog = () => {
+    setOpenEditDialog(true);
+  };
+
+  const handleCloseEditDialog = () => {
+    setOpenEditDialog(false);
+  };
+
   //State For Delete Task
-  const [open, setOpen] = React.useState(false);
+  const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
+  const handleOpenDeleteDialog = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleCloseDeleteDialog = () => {
+    setOpenDeleteDialog(false);
+  };
+  //Delete Task ƒn
   const handleDelete = (taskId) => {
-    setOpen(false);
+    setOpenDeleteDialog(false);
     const updatedTasks = todos.filter((task) => {
       if (task.id === taskId) {
         return false;
@@ -52,18 +70,14 @@ export default function Todo({ task }) {
       }
     });
     setTodos(updatedTasks);
-
-    alert("Deleted HHH");
   };
 
   return (
     <>
       {/* Delete Modal || Dialog */}
       <Dialog
-        open={open}
-        onClose={() => {
-          setOpen(false);
-        }}
+        open={openDeleteDialog}
+        onClose={handleCloseDeleteDialog}
         aria-labelledby="alert-dialog-title"
         aria-describedby="alert-dialog-description">
         <DialogTitle id="alert-dialog-title">{"Delete The Task?"}</DialogTitle>
@@ -74,12 +88,7 @@ export default function Todo({ task }) {
           </DialogContentText>
         </DialogContent>
         <DialogActions>
-          <Button
-            onClick={() => {
-              setOpen(false);
-            }}>
-            Close
-          </Button>
+          <Button onClick={handleCloseDeleteDialog}>Close</Button>
           <Button
             sx={{ color: "#ff0e0e" }}
             onClick={() => {
@@ -91,6 +100,35 @@ export default function Todo({ task }) {
         </DialogActions>
       </Dialog>
 
+      {/* Edit Modal || Dialog */}
+      <Dialog
+        open={openEditDialog}
+        onClose={() => {
+          setOpenEditDialog(false);
+        }}>
+        <DialogTitle>Subscribe</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            To subscribe to this website, please enter your email address here.
+            We will send updates occasionally.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Email Address"
+            type="email"
+            fullWidth
+            variant="standard"
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseEditDialog}>Cancel</Button>
+          <Button onClick={handleCloseEditDialog}>Subscribe</Button>
+        </DialogActions>
+      </Dialog>
+
+      {/* Task Card */}
       <Card
         className="todo-card"
         sx={{
@@ -132,6 +170,7 @@ export default function Todo({ task }) {
               </IconButton>
               {/* Edit Button */}
               <IconButton
+                onClick={handleOpeEditDialog}
                 sx={{
                   color: "third",
                   backgroundColor: "white",
@@ -141,9 +180,7 @@ export default function Todo({ task }) {
               </IconButton>
               {/* Delete Button */}
               <IconButton
-                onClick={() => {
-                  setOpen(true);
-                }}
+                onClick={handleOpenDeleteDialog}
                 sx={{
                   color: "fourth",
                   backgroundColor: "white",
