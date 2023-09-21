@@ -96,7 +96,7 @@ export default function TodoList() {
           </ToggleButtonGroup>
 
           {/* ====== All Tasks ====== */}
-          <div style={{ height: "60vh", overflow: "scroll" }}>{tasksMap}</div>
+          <div style={{ height: "55vh", overflow: "scroll" }}>{tasksMap}</div>
 
           {/* ====== All Tasks ====== */}
 
@@ -136,7 +136,7 @@ export default function TodoList() {
       <span
         style={{
           display: "block",
-          margin: "10px",
+          marginTop: "10px",
           letterSpacing: "2px",
           color: "rgb(4 62 2)",
         }}>
