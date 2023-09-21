@@ -1,7 +1,11 @@
 import * as React from "react";
+import { useState } from "react";
+import Todo from "./Todo";
+
+//uuid Library For Generate Unique IDs
 import { v4 as uuidv4 } from "uuid";
 
-import Todo from "./Todo";
+//From MUI library
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
@@ -10,13 +14,10 @@ import Typography from "@mui/material/Typography";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import Divider from "@mui/material/Divider";
-
 import { Grid } from "@mui/material";
-
 import TextField from "@mui/material/TextField";
 
-import { useState } from "react";
-
+//Pre written Tasks
 const intialTodos = [
   {
     id: uuidv4(),
@@ -38,6 +39,7 @@ const intialTodos = [
   },
 ];
 
+//Main Fn
 export default function TodoList() {
   const [todos, setTodos] = useState(intialTodos);
   const [titleInput, setTitleInput] = useState("");
@@ -48,6 +50,7 @@ export default function TodoList() {
     );
   });
 
+  //Update State Of The Task
   function handleIscompleted(taskId) {
     const updateTask = todos.map((task) => {
       if (task.id === taskId) {
@@ -55,9 +58,10 @@ export default function TodoList() {
       }
       return task;
     });
-
     setTodos(updateTask);
   }
+
+  //Adding New Task
   function handleAddClick() {
     setTodos([
       ...todos,
@@ -70,6 +74,7 @@ export default function TodoList() {
     ]);
     setTitleInput("");
   }
+
   return (
     <Container maxWidth="sm" sx={{ margin: "50px 0" }}>
       <Card sx={{ minWidth: 275 }}>
@@ -89,7 +94,11 @@ export default function TodoList() {
             <ToggleButton value="center">Completed </ToggleButton>
             <ToggleButton value="right">Not Completed</ToggleButton>
           </ToggleButtonGroup>
+
+          {/* ====== All Tasks ====== */}
           {tasksMap}
+          {/* ====== All Tasks ====== */}
+
           {/* <InputTask /> */}
           <Grid
             sx={{
