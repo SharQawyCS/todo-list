@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useContext } from "react";
 import { TodosContext } from "../contexts/TodosContext";
 
@@ -27,19 +27,18 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 export default function Todo({ task }) {
   const { todos, setTodos } = useContext(TodosContext);
 
-  //Update State Of The Task
   //Toggle Checked Completed
   function handleIsCompleted(taskId) {
-    const updatedTask = todos.map((task) => {
+    const updatedTaskMapForCheck = todos.map((task) => {
       if (task.id === taskId) {
         task.isCompleted = !task.isCompleted;
       }
       return task;
     });
-    setTodos(updatedTask);
+    setTodos(updatedTaskMapForCheck);
   }
 
-  //State For Edit Task
+  //State For Edit Task => Edit DIALOG
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const handleOpeEditDialog = () => {
     setOpenEditDialog(true);
@@ -48,13 +47,24 @@ export default function Todo({ task }) {
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
   };
+  //This Fn toggle SUBMIT BTN enabled or disabled
+  const [submitBtn, setSubmitBtn] = useState(true);
+
   //Edit Task ƒn
+  const [updatedTask, setUpdatedTask] = useState({ title: "", details: "" });
   function handleEdit(taskId) {
-    alert(taskId)
+    const updatedTaskMapForEdit = todos.map((task) => {
+      if (task.id === taskId) {
+        task.title = updatedTask.title;
+        task.details = updatedTask.details;
+      }
+      return task;
+    });
+    setTodos(updatedTaskMapForEdit);
     handleCloseEditDialog();
   }
 
-  //State For Delete Task
+  //State For Delete Task => Delete DIALOG
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
   const handleOpenDeleteDialog = () => {
     setOpenDeleteDialog(true);
@@ -88,6 +98,14 @@ export default function Todo({ task }) {
           <TextField
             sx={{ margin: "30px 0 10px" }}
             defaultValue={task.title}
+            onChange={(e) => {
+              setSubmitBtn(false); //To Enable Sumbit btn after editing
+              setUpdatedTask({
+                ...updatedTask,
+                title: e.target.value,
+                details: task.details,
+              });
+            }}
             fullWidth
             id="outlined-error"
             label="Outlined"
@@ -95,6 +113,14 @@ export default function Todo({ task }) {
           <TextField
             sx={{ margin: "30px 0 10px" }}
             defaultValue={task.details}
+            onChange={(e) => {
+              setSubmitBtn(false); //To Enable Sumbit btn after editing
+              setUpdatedTask({
+                ...updatedTask,
+                title: task.title,
+                details: e.target.value,
+              });
+            }}
             fullWidth
             id="outlined-multiline-flexible"
             label="Multiline"
@@ -105,6 +131,7 @@ export default function Todo({ task }) {
         <DialogActions>
           <Button onClick={handleCloseEditDialog}>Cancel</Button>
           <Button
+            disabled={submitBtn}
             onClick={() => {
               handleEdit(task.id);
             }}>
