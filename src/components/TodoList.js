@@ -120,7 +120,7 @@ export default function TodoList() {
             />
 
             <Button
-              disabled={(titleInput === "")}
+              disabled={titleInput === ""}
               onClick={handleAddClick}
               sx={{
                 backgroundColor: "main",
@@ -133,6 +133,15 @@ export default function TodoList() {
           </Grid>
         </CardContent>
       </Card>
+      <span
+        style={{
+          display: "block",
+          margin: "10px",
+          letterSpacing: "2px",
+          color: "rgb(4 62 2)",
+        }}>
+        Made With Love In EGYPT 💚🇪🇬
+      </span>
     </Container>
   );
 }
