@@ -30,20 +30,29 @@ export default function Todo({ task }) {
   //Update State Of The Task
   //Toggle Checked
   function handleIsCompleted(taskId) {
-    const updateTask = todos.map((task) => {
+    const updatedTask = todos.map((task) => {
       if (task.id === taskId) {
         task.isCompleted = !task.isCompleted;
       }
       return task;
     });
-    setTodos(updateTask);
+    setTodos(updatedTask);
   }
 
   //Delete Task ƒn
   //State For Delete Task
   const [open, setOpen] = React.useState(false);
-  const handleDelete = () => {
+  const handleDelete = (taskId) => {
     setOpen(false);
+    const updatedTasks = todos.filter((task) => {
+      if (task.id === taskId) {
+        return false;
+      } else {
+        return true;
+      }
+    });
+    setTodos(updatedTasks);
+
     alert("Deleted HHH");
   };
 
@@ -71,7 +80,12 @@ export default function Todo({ task }) {
             }}>
             Close
           </Button>
-          <Button sx={{ color: "#ff0e0e" }} onClick={handleDelete} autoFocus>
+          <Button
+            sx={{ color: "#ff0e0e" }}
+            onClick={() => {
+              handleDelete(task.id);
+            }}
+            autoFocus>
             Delete
           </Button>
         </DialogActions>
