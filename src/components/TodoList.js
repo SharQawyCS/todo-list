@@ -22,18 +22,42 @@ import { Grid } from "@mui/material";
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
   const [titleInput, setTitleInput] = useState("");
+  const [displayTasksType, setDisplayTasksType] = useState("all"); //For filter tasks "ALL - COMPLETED - NOT COMPLETED"
 
-  const tasksMap = todos.map((task) => {
+  //Fn For Change Filter Tasks "ALL - COMPLETED - NOT COMPLETED"
+  const toggleDisplayType = function (e) {
+    setDisplayTasksType(e.target.value);
+  };
+
+  //Array of Completed Tasks
+  const completedTasks = todos.filter((task) => {
+    return task.isCompleted;
+  });
+
+  //Array of non-Completed Tasks
+  const unCompletedTasks = todos.filter((task) => {
+    return !task.isCompleted;
+  });
+
+  let tasksToBeRendered = todos; //default value is all tasks
+
+  if (displayTasksType === "completed") {
+    tasksToBeRendered = completedTasks;
+  } else if (displayTasksType === "uncompleted") {
+    tasksToBeRendered = unCompletedTasks;
+  }
+
+  //Create Every Singel Task
+  const tasksMap = tasksToBeRendered.map((task) => {
     return <Todo key={task.id} task={task} />;
   });
 
-  //!useEffect , get from local to setTodos
+  //get Tasks From local storage
   useEffect(() => {
     setTodos(JSON.parse(localStorage.getItem("todos")));
-  }, []);
+  }, [setTodos]);
 
   //Adding New Task
-
   function handleAddClick() {
     const newTodo = {
       id: uuidv4(),
@@ -58,12 +82,14 @@ export default function TodoList() {
           <Divider />
           {/* ---Toggle Buttons--- */}
           <ToggleButtonGroup
+            value={displayTasksType}
+            onChange={toggleDisplayType}
             style={{ marginTop: "30px" }}
             exclusive
             aria-label="text alignment">
-            <ToggleButton value="left">All</ToggleButton>
-            <ToggleButton value="center">Completed </ToggleButton>
-            <ToggleButton value="right">Not Completed</ToggleButton>
+            <ToggleButton value="all">All</ToggleButton>
+            <ToggleButton value="completed">Completed </ToggleButton>
+            <ToggleButton value="uncompleted">Not Completed</ToggleButton>
           </ToggleButtonGroup>
 
           {/* ====== All Tasks ====== */}

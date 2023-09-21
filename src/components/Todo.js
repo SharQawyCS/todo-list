@@ -176,7 +176,7 @@ export default function Todo({ task }) {
 
       {/* Task Card */}
       <Card
-        className="todo-card"
+        className="todo-card" 
         sx={{
           minWidth: 275,
           marginTop: "20px",
