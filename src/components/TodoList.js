@@ -1,5 +1,6 @@
 import * as React from "react";
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { TodosContext } from "../contexts/TodosContext";
 import Todo from "./Todo";
 
 //uuid Library For Generate Unique IDs
@@ -9,57 +10,22 @@ import { v4 as uuidv4 } from "uuid";
 import Container from "@mui/material/Container";
 import Card from "@mui/material/Card";
 import CardContent from "@mui/material/CardContent";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
+import Button from "@mui/material/Button";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
+import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
-import TextField from "@mui/material/TextField";
-
-//Pre written Tasks
-const intialTodos = [
-  {
-    id: uuidv4(),
-    title: "Read A book",
-    details: "My Best Book",
-    isCompleted: true,
-  },
-  {
-    id: uuidv4(),
-    title: "seconed Task ",
-    details: "My LoL Task",
-    isCompleted: false,
-  },
-  {
-    id: uuidv4(),
-    title: "Not A Task ",
-    details: "I am a JOKE",
-    isCompleted: false,
-  },
-];
 
 //Main Fn
 export default function TodoList() {
-  const [todos, setTodos] = useState(intialTodos);
+  const { todos, setTodos } = useContext(TodosContext);
   const [titleInput, setTitleInput] = useState("");
 
   const tasksMap = todos.map((task) => {
-    return (
-      <Todo key={task.id} task={task} handleIscompleted={handleIscompleted} />
-    );
+    return <Todo key={task.id} task={task} />;
   });
-
-  //Update State Of The Task
-  function handleIscompleted(taskId) {
-    const updateTask = todos.map((task) => {
-      if (task.id === taskId) {
-        task.isCompleted = !task.isCompleted;
-      }
-      return task;
-    });
-    setTodos(updateTask);
-  }
 
   //Adding New Task
   function handleAddClick() {
