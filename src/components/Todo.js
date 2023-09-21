@@ -39,7 +39,6 @@ export default function Todo({ task }) {
     setTodos(updatedTask);
   }
 
-  //Edit Task ƒn
   //State For Edit Task
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const handleOpeEditDialog = () => {
@@ -49,6 +48,11 @@ export default function Todo({ task }) {
   const handleCloseEditDialog = () => {
     setOpenEditDialog(false);
   };
+  //Edit Task ƒn
+  function handleEdit(taskId) {
+    alert(taskId)
+    handleCloseEditDialog();
+  }
 
   //State For Delete Task
   const [openDeleteDialog, setOpenDeleteDialog] = React.useState(false);
@@ -74,6 +78,41 @@ export default function Todo({ task }) {
 
   return (
     <>
+      {/* Edit Modal || Dialog */}
+      <Dialog open={openEditDialog}>
+        <DialogTitle>Edit Task Contnet</DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Edit your task info and press submit.
+          </DialogContentText>
+          <TextField
+            sx={{ margin: "30px 0 10px" }}
+            defaultValue={task.title}
+            fullWidth
+            id="outlined-error"
+            label="Outlined"
+          />
+          <TextField
+            sx={{ margin: "30px 0 10px" }}
+            defaultValue={task.details}
+            fullWidth
+            id="outlined-multiline-flexible"
+            label="Multiline"
+            multiline
+            maxRows={6}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleCloseEditDialog}>Cancel</Button>
+          <Button
+            onClick={() => {
+              handleEdit(task.id);
+            }}>
+            Submit
+          </Button>
+        </DialogActions>
+      </Dialog>
+
       {/* Delete Modal || Dialog */}
       <Dialog
         open={openDeleteDialog}
@@ -83,8 +122,8 @@ export default function Todo({ task }) {
         <DialogTitle id="alert-dialog-title">{"Delete The Task?"}</DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            If you selected Delete you can not prevent changed and the task will
-            be deleted forever, Are you sure?
+            If you selected <span className="del-word">DELETE</span> you can not
+            prevent changed and the task will be deleted forever, Are you sure?
           </DialogContentText>
         </DialogContent>
         <DialogActions>
@@ -97,34 +136,6 @@ export default function Todo({ task }) {
             autoFocus>
             Delete
           </Button>
-        </DialogActions>
-      </Dialog>
-
-      {/* Edit Modal || Dialog */}
-      <Dialog
-        open={openEditDialog}
-        onClose={() => {
-          setOpenEditDialog(false);
-        }}>
-        <DialogTitle>Subscribe</DialogTitle>
-        <DialogContent>
-          <DialogContentText>
-            To subscribe to this website, please enter your email address here.
-            We will send updates occasionally.
-          </DialogContentText>
-          <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="Email Address"
-            type="email"
-            fullWidth
-            variant="standard"
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleCloseEditDialog}>Cancel</Button>
-          <Button onClick={handleCloseEditDialog}>Subscribe</Button>
         </DialogActions>
       </Dialog>
 
