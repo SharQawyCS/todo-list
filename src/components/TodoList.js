@@ -28,6 +28,7 @@ export default function TodoList() {
   const toggleDisplayType = function (e) {
     setDisplayTasksType(e.target.value);
   };
+  let tasksToBeRendered = todos; //default value is all tasks
 
   //Array of Completed Tasks
   const completedTasks = todos.filter((task) => {
@@ -38,8 +39,6 @@ export default function TodoList() {
   const unCompletedTasks = todos.filter((task) => {
     return !task.isCompleted;
   });
-
-  let tasksToBeRendered = todos; //default value is all tasks
 
   if (displayTasksType === "completed") {
     tasksToBeRendered = completedTasks;
@@ -54,7 +53,10 @@ export default function TodoList() {
 
   //get Tasks From local storage
   useEffect(() => {
-    setTodos(JSON.parse(localStorage.getItem("todos")));
+    let tasksStoraged = localStorage.getItem("todos");
+    if (tasksStoraged != null) {
+      setTodos(JSON.parse(tasksStoraged));
+    }
   }, [setTodos]);
 
   //Adding New Task
@@ -71,12 +73,12 @@ export default function TodoList() {
   }
 
   return (
-    <Container maxWidth="sm" sx={{ margin: "50px 0" }}>
+    <Container maxWidth="sm" >
       <Card sx={{ minWidth: 275 }}>
         <CardContent>
           <Typography
             variant="h3"
-            sx={{ fontWeight: "400", margin: "10px 0 20px" }}>
+            sx={{ fontWeight: "400", margin: "10px 0 " }}>
             My Tasks
           </Typography>
           <Divider />
@@ -84,7 +86,7 @@ export default function TodoList() {
           <ToggleButtonGroup
             value={displayTasksType}
             onChange={toggleDisplayType}
-            style={{ marginTop: "30px" }}
+            style={{ margin: "10px 0 " }}
             exclusive
             aria-label="text alignment">
             <ToggleButton value="all">All</ToggleButton>
@@ -93,7 +95,10 @@ export default function TodoList() {
           </ToggleButtonGroup>
 
           {/* ====== All Tasks ====== */}
-          {tasksMap}
+          <div style={{ height: "60vh", overflow: "scroll" }}>
+            {tasksMap}
+          </div>
+
           {/* ====== All Tasks ====== */}
 
           {/* <InputTask /> */}
