@@ -42,7 +42,7 @@ export default function Todo({ task }) {
   const [openEditDialog, setOpenEditDialog] = React.useState(false);
   const handleOpeEditDialog = () => {
     setOpenEditDialog(true);
-    setSubmitBtn(true) //To Disable submit BTN
+    setSubmitBtn(true) //To Ensure That submit BTN Is Disable 
   };
 
   const handleCloseEditDialog = () => {
@@ -94,7 +94,7 @@ export default function Todo({ task }) {
         <DialogTitle>Edit Task Contnet</DialogTitle>
         <DialogContent>
           <DialogContentText>
-            Edit your task info and press submit.
+            Edit your task info and press SUBMIT.
           </DialogContentText>
           <TextField
             sx={{ margin: "30px 0 10px" }}
@@ -109,7 +109,7 @@ export default function Todo({ task }) {
             }}
             fullWidth
             id="outlined-error"
-            label="Outlined"
+            label="Task Name"
           />
           <TextField
             sx={{ margin: "30px 0 10px" }}
@@ -124,7 +124,7 @@ export default function Todo({ task }) {
             }}
             fullWidth
             id="outlined-multiline-flexible"
-            label="Multiline"
+            label="Task Details"
             multiline
             maxRows={6}
           />
