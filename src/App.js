@@ -1,9 +1,8 @@
+import { useState } from "react";
 import "./App.css";
 import TodoList from "./components/TodoList";
-import MySnackBar from "./components/MySnackBar";
-import { useState } from "react";
 import { TodosContext } from "./contexts/TodosContext";
-import { SnackBarContext } from "./contexts/SnackBarContext";
+import { SnackBarProvider } from "./contexts/SnackBarContext";
 import { createTheme, ThemeProvider } from "@mui/material";
 
 //uuid Library For Generate Unique IDs
@@ -53,20 +52,11 @@ const intialTodos = [
 
 function App() {
   const [todos, setTodos] = useState(intialTodos);
-  const [snackBarOpen, setSnackBarOpen] = useState(false);
-  const [snackBarMessage, setSnackBarMessage] = useState("Write your message in TodoList.js ")
-
-  function showHideSnackBar(message) {
-    setSnackBarOpen(true);
-    setSnackBarMessage(message)
-    setTimeout(() => {
-      setSnackBarOpen(false);
-    }, 2500);
-  }
+  
 
   return (
     <ThemeProvider theme={theme}>
-      <SnackBarContext.Provider value={{ showHideSnackBar }}>
+      <SnackBarProvider >
         <div
           className="App"
           style={{
@@ -78,10 +68,9 @@ function App() {
           }}>
           <TodosContext.Provider value={{ todos: todos, setTodos: setTodos }}>
             <TodoList />
-            <MySnackBar open={snackBarOpen} message={snackBarMessage} />
           </TodosContext.Provider>
         </div>
-      </SnackBarContext.Provider>
+      </SnackBarProvider>
     </ThemeProvider>
   );
 }
