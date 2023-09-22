@@ -19,7 +19,6 @@ import TextField from "@mui/material/TextField";
 import Divider from "@mui/material/Divider";
 import { Grid } from "@mui/material";
 
-//Main Fn
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
   const { showHideSnackBar } = useContext(SnackBarContext);
