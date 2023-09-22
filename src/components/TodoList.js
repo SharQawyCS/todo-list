@@ -80,8 +80,8 @@ export default function TodoList() {
   }
 
   return (
-    <Container maxWidth="sm">
-      <Card sx={{ minWidth: 275 }}>
+    <Container maxWidth="md">
+      <Card sx={{ minWidth: "200px !important" }}>
         <CardContent>
           <Typography
             variant="h3"

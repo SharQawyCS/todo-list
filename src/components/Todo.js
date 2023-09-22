@@ -187,32 +187,34 @@ export default function Todo({ task }) {
       <Card
         className="todo-card"
         sx={{
-          minWidth: 275,
+          minWidth: "200px",
           marginTop: "20px",
           backgroundColor: "main",
           color: "white",
         }}>
-        <CardContent>
+        <CardContent sx={{ padding: ".75em !important" }}>
           <Grid container spacing={2}>
-            <Grid xs={6} sm={8}>
+            <Grid xs={8} sm={8}>
               <Typography
-                variant="h5"
                 sx={{
                   textAlign: "left",
+                  fontSize: "1.5rem",
+                  color: "#fff",
                   textDecoration: task.isCompleted ? "line-through" : "none",
                 }}>
                 {task.title}
               </Typography>
-              <Typography variant="h6" sx={{ textAlign: "left" }}>
+              <Typography
+                sx={{ textAlign: "left", fontSize: "1rem", color: "#eee" }}>
                 {task.details}
               </Typography>
             </Grid>
             {/* ====== Buttons Grid ====== */}
             <Grid
-              xs={6}
+              xs={4}
               sm={4}
               display="flex"
-              justifyContent="space-between"
+              justifyContent="flex-end"
               alignItems="center">
               {/* Completed Check Button */}
               <IconButton
@@ -220,6 +222,7 @@ export default function Todo({ task }) {
                   handleIsCompleted(task.id);
                 }}
                 sx={{
+                  padding: "5px",
                   color: "seconed",
                   backgroundColor: task.isCompleted
                     ? "rgba(0,0,0,.6)"
@@ -232,6 +235,8 @@ export default function Todo({ task }) {
               <IconButton
                 onClick={handleOpeEditDialog}
                 sx={{
+                  padding: "5px",
+                  marginLeft: ".4em",
                   color: "third",
                   backgroundColor: "white",
                   border: "solid third 1px",
@@ -242,6 +247,8 @@ export default function Todo({ task }) {
               <IconButton
                 onClick={handleOpenDeleteDialog}
                 sx={{
+                  padding: "5px",
+                  marginLeft: ".4em",
                   color: "fourth",
                   backgroundColor: "white",
                   border: "solid fourth 1px",
