@@ -104,7 +104,6 @@ export default function TodoList() {
 
           {/* ====== All Tasks ====== */}
           <div style={{ height: "60vh", overflow: "scroll" }}>{tasksMap}</div>
-
           {/* ====== All Tasks ====== */}
 
           {/* <InputTask /> */}
