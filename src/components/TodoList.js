@@ -1,6 +1,7 @@
 import * as React from "react";
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext, useEffect, useMemo } from "react";
 import { TodosContext } from "../contexts/TodosContext";
+import { SnackBarContext } from "../contexts/SnackBarContext";
 import Todo from "./Todo";
 
 //uuid Library For Generate Unique IDs
@@ -21,6 +22,8 @@ import { Grid } from "@mui/material";
 //Main Fn
 export default function TodoList() {
   const { todos, setTodos } = useContext(TodosContext);
+  const { showHideSnackBar } = useContext(SnackBarContext);
+
   const [titleInput, setTitleInput] = useState("");
   const [displayTasksType, setDisplayTasksType] = useState("all"); //For filter tasks "ALL - COMPLETED - NOT COMPLETED"
 
@@ -31,14 +34,18 @@ export default function TodoList() {
   let tasksToBeRendered = todos; //default value is all tasks
 
   //Array of Completed Tasks
-  const completedTasks = todos.filter((task) => {
-    return task.isCompleted;
-  });
+  const completedTasks = useMemo(() => {
+    return todos.filter((task) => {
+      return task.isCompleted;
+    });
+  }, [todos]);
 
   //Array of non-Completed Tasks
-  const unCompletedTasks = todos.filter((task) => {
-    return !task.isCompleted;
-  });
+  const unCompletedTasks = useMemo(() => {
+    return todos.filter((task) => {
+      return !task.isCompleted;
+    });
+  }, [todos]);
 
   if (displayTasksType === "completed") {
     tasksToBeRendered = completedTasks;
@@ -61,6 +68,7 @@ export default function TodoList() {
 
   //Adding New Task
   function handleAddClick() {
+    showHideSnackBar("Task Added Successfully");
     const newTodo = {
       id: uuidv4(),
       title: titleInput,
@@ -96,7 +104,7 @@ export default function TodoList() {
           </ToggleButtonGroup>
 
           {/* ====== All Tasks ====== */}
-          <div style={{ height: "55vh", overflow: "scroll" }}>{tasksMap}</div>
+          <div style={{ height: "60vh", overflow: "scroll" }}>{tasksMap}</div>
 
           {/* ====== All Tasks ====== */}
 
@@ -136,7 +144,7 @@ export default function TodoList() {
       <span
         style={{
           display: "block",
-          marginTop: "10px",
+          marginTop: "1vh",
           letterSpacing: "2px",
           color: "rgb(4 62 2)",
         }}>

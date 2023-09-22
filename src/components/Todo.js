@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useContext } from "react";
 import { TodosContext } from "../contexts/TodosContext";
+import { SnackBarContext } from "../contexts/SnackBarContext";
 
 //From MUI library
 import Card from "@mui/material/Card";
@@ -26,11 +27,17 @@ import EditOutlinedIcon from "@mui/icons-material/EditOutlined";
 //Main ƒn Starting
 export default function Todo({ task }) {
   const { todos, setTodos } = useContext(TodosContext);
+  const { showHideSnackBar } = useContext(SnackBarContext);
 
   //Toggle Checked Completed
   function handleIsCompleted(taskId) {
     const updatedTaskMapForCheck = todos.map((task) => {
       if (task.id === taskId) {
+        if (task.isCompleted) {
+          showHideSnackBar("Task Added To Not Completed");
+        } else {
+          showHideSnackBar("Task Added To Completed");
+        }
         task.isCompleted = !task.isCompleted;
       }
       return task;
@@ -59,6 +66,7 @@ export default function Todo({ task }) {
     details: task.details,
   });
   function handleEdit(taskId) {
+    showHideSnackBar("Task Edited Successfully");
     const updatedTasksMapForEdit = todos.map((task) => {
       if (task.id === taskId) {
         task.title = updatedTask.title;
@@ -83,6 +91,7 @@ export default function Todo({ task }) {
   };
   //Delete Task ƒn
   const handleDelete = (taskId) => {
+    showHideSnackBar("Task Deleted Successfully");
     setOpenDeleteDialog(false);
     const updatedTasksFilterForDelete = todos.filter((task) => {
       if (task.id === taskId) {

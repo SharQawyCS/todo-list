@@ -1,6 +1,8 @@
 import "./App.css";
 import TodoList from "./components/TodoList";
+import MySnackBar from "./components/MySnackBar";
 import { TodosContext } from "./contexts/TodosContext";
+import { SnackBarContext } from "./contexts/SnackBarContext";
 import { useState } from "react";
 
 import { createTheme, ThemeProvider } from "@mui/material";
@@ -52,22 +54,35 @@ const intialTodos = [
 
 function App() {
   const [todos, setTodos] = useState(intialTodos);
+  const [snackBarOpen, setSnackBarOpen] = useState(false);
+  const [snackBarMessage, setSnackBarMessage] = useState("Write your message in TodoList.js ")
+
+  function showHideSnackBar(message) {
+    setSnackBarOpen(true);
+    setSnackBarMessage(message)
+    setTimeout(() => {
+      setSnackBarOpen(false);
+    }, 2500);
+  }
 
   return (
     <ThemeProvider theme={theme}>
-      <div
-        className="App"
-        style={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          backgroundColor: "#79AC78",
-          minHeight: "100vh",
-        }}>
-        <TodosContext.Provider value={{ todos: todos, setTodos: setTodos }}>
-          <TodoList />
-        </TodosContext.Provider>
-      </div>
+      <SnackBarContext.Provider value={{ showHideSnackBar }}>
+        <div
+          className="App"
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            backgroundColor: "#79AC78",
+            minHeight: "100vh",
+          }}>
+          <TodosContext.Provider value={{ todos: todos, setTodos: setTodos }}>
+            <TodoList />
+            <MySnackBar open={snackBarOpen} message={snackBarMessage} />
+          </TodosContext.Provider>
+        </div>
+      </SnackBarContext.Provider>
     </ThemeProvider>
   );
 }
